@@ -1,0 +1,1 @@
+using CatalogoServizio as service from '../../srv/cat-service';

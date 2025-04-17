@@ -1,0 +1,3 @@
+ID,DataPrestito,DataRestituzione,Libri_ID,Utente_ID,Restituito
+1,2025-04-01,2025-04-15,1,1,False
+2,2025-04-03,2025-04-17,2,2,True

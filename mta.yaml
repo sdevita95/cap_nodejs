@@ -1,0 +1,133 @@
+_schema-version: 3.3.0
+ID: nodeDemo
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: nodeDemo-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: nodeDemo-db
+  - name: nodeDemo-auth
+  - name: nodeDemo-destination-service
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    instances: 1
+  build-parameters:
+    builder: npm-ci
+- name: nodeDemo-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: nodeDemo-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: nodeDemo-approuter
+  type: approuter.nodejs
+  path: approuter
+  requires:
+  - name: nodeDemo_html_repo_runtime
+  - name: nodeDemo-auth
+  - name: nodeDemo-destination-service
+  - name: srv-api
+  provides:
+  - name: app-api
+    properties:
+      app-protocol: ${protocol}
+      app-uri: ${default-uri}
+  parameters:
+    disk-quota: 256M
+    keep-existing-routes: true
+    memory: 256M
+- name: nodeDemo-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: nodeDemo-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comsapnodedemouimodule.zip
+      name: comsapnodedemouimodule
+      target-path: resources/
+- name: comsapnodedemouimodule
+  type: html5
+  path: app/nodedemo-uimodule
+  requires:
+    - name: nodeDemo-auth
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: nodeDemo_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: nodeDemo-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: nodeDemo-auth
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: nodeDemo-${org}-${space}
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: nodeDemo-destination-service
+  type: org.cloudfoundry.managed-service
+  requires:
+    - name: srv-api
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.ForwardAuthToken: true
+            Name: backend
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+            HTML5.Timeout: 300001
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: nodeDemo-destination-service
+    service-plan: lite
+- name: nodeDemo-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: nodeDemo-html5-service
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production

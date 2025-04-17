@@ -1,0 +1,12 @@
+{
+  "welcomeFile": "/comsapnodedemouimodule/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/backend/(.*)$",
+      "target": "$1",
+      "destination": "backend",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
