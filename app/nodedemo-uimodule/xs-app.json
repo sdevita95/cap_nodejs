@@ -3,8 +3,8 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/backend/(.*)$",
-      "target": "$1",
+      "source": "^/odata/(.*)$",
+      "target": "/odata/$1",
       "destination": "backend",
       "authenticationType": "xsuaa"
     },

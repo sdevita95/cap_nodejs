@@ -16,8 +16,16 @@
       "toolsId": "122b6230-fb0e-453d-8aa6-f15e4e70ae1e"
     },
     "dataSources": {
-      "mainService": {
-        "uri": "/backend/odata/v4/catalogo-servizio/",
+      "odataV4": {
+        "uri": "/odata/v4/catalogo-servizio/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      },
+      "odataV2": {
+        "uri": "/odata/v2/catalogo-servizio/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -62,8 +70,17 @@
           "bundleName": "com.sap.nodedemouimodule.i18n.i18n"
         }
       },
-      "oModelService": {
-        "dataSource": "mainService",
+      "odataV4": {
+        "dataSource": "odataV4",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "odataV2": {
+        "dataSource": "odataV2",
         "preload": true,
         "settings": {
           "operationMode": "Server",
