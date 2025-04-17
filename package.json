@@ -31,7 +31,7 @@
       "native_hana_associations": false
     },
     "requires": {
-      "auth": "mocked",
+      "auth": "xsuaa",
       "northwind": {
         "kind": "odata-v2",
         "model": "srv/external/northwind",
