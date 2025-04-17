@@ -13,7 +13,9 @@
     "@sap/cds": "^8",
     "@sap/xssec": "^4",
     "express": "^4",
-    "g": "^2.0.1"
+    "g": "^2.0.1",
+    "@sap-cloud-sdk/http-client": "^3",
+    "@sap-cloud-sdk/resilience": "^3"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
@@ -29,7 +31,14 @@
       "native_hana_associations": false
     },
     "requires": {
-      "auth": "mocked"
+      "auth": "mocked",
+      "northwind": {
+        "kind": "odata-v2",
+        "model": "srv/external/northwind",
+        "credentials": {
+          "url": "https://services.odata.org/V2/Northwind/Northwind.svc/"
+        }
+      }
     }
   }
 }
