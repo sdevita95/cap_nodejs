@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "odataV4": {
-        "uri": "/odata/v4/catalogo-servizio/",
+        "uri": "/odata/v4/backend/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -25,11 +25,19 @@
         }
       },
       "odataV2": {
-        "uri": "/odata/v2/catalogo-servizio/",
+        "uri": "/odata/v2/backend/",
         "type": "OData",
         "settings": {
           "annotations": [],
-          "odataVersion": "4.0"
+          "odataVersion": "2.0"
+        }
+      },
+      "odataNorthwindV2": {
+        "uri": "/odata/v2/northwind/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "2.0"
         }
       }
     }
@@ -81,6 +89,15 @@
       },
       "odataV2": {
         "dataSource": "odataV2",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "odataNorthwindV2": {
+        "dataSource": "odataNorthwindV2",
         "preload": true,
         "settings": {
           "operationMode": "Server",
