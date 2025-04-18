@@ -1,6 +1,6 @@
 const cds = require('@sap/cds');
 module.exports = async (srv) => {
-    //internal backend method
+    const msg = cds.i18n.messages
     srv.on('READ', 'Libri', async (req) => {
         const query = req.query;
         const libri = await cds.tx(req).run(query);
@@ -11,21 +11,91 @@ module.exports = async (srv) => {
         }
         return libri;
     });
-
-    const { Libri } = srv.entities;
-    srv.on('LibriPerAutore', async (req) => {
-        const { ID } = req.data;
-        if (!ID && ID !== 0) {
-            return req.reject(400, "error.noAuthorID");
+    const { Libri, Autori, Generi } = srv.entities;
+    srv.on('addLibro', async (req) => {
+      const { Titolo, CopieDisponibili, AutoreID, GenereID } = req.data;
+  
+      if (!Titolo || !CopieDisponibili || !AutoreID || !GenereID) {
+        return req.reject(400, {
+          code: 400,
+          message: msg.for('error.missingData')
+          });
+      }
+  
+      try {
+        const autore = await SELECT.one.from(Autori).where({ ID: AutoreID });
+        const genere = await SELECT.one.from(Generi).where({ ID: GenereID });
+  
+        if (!autore) {
+          return req.reject(404, {
+            code: 404,
+            message: msg.for('error.authorNotFound', [AutoreID])
+            });
         }
-        return await SELECT.from(Libri).where({ Autore_ID: ID });
+  
+        if (!genere) {
+          return req.reject(404, {
+            code: 404,
+            message: msg.for('error.genreNotFound', [GenereID])
+            });
+        }
+  
+        const result = await INSERT.into(Libri).entries({
+          Titolo,
+          CopieDisponibili,
+          Autore_ID: AutoreID,
+          Genere_ID: GenereID
+        });
+  
+        return {
+          code: 201,
+          message: msg.for('success.bookCreated', [Titolo])
+          };
+  
+      } catch (err) {
+        console.error(err);
+        return req.reject(500, {
+          code: 500,
+          message: msg.for('error.process', [err.message])
+          });
+      }
+    });
+    const { Prestiti } = srv.entities;
+    srv.on('deleteLibro', async (req) => {
+        const { ID } = req.data;
+    
+        if (!ID && ID !== 0) {
+            return req.reject(400, {
+                code: 400,
+                message: msg.for('noBookID')
+            });
+        }
+        try {
+            const libro = await SELECT.from(Libri).where({ ID });
+            if (!libro || libro.length === 0) {
+                return req.reject(404, {
+                    code: 404,
+                    message: msg.for('error.bookNotFound', [ID])
+                });
+            }
+            await DELETE.from(Prestiti).where({ 'Libri.ID': ID });
+            await DELETE.from(Libri).where({ ID });
+            return {
+                code: 202,
+                message: msg.for('success.bookDeleted', [ID])
+            };
+        } catch (err) {
+            return req.reject(500, {
+                code: 500,
+                message: msg.for('error.process', [err.message])
+            });
+        }
     });
 
     const northwind_srv = await cds.connect.to("northwind");
     srv.on("READ", "Products", (req) => {
         return northwind_srv.tx(req).run(req.query);
     });
-
     srv.on("READ", "Categories", (req) => {
         return northwind_srv.tx(req).run(req.query);
     });

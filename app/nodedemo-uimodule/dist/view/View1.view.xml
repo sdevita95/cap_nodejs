@@ -1,6 +1,116 @@
 <mvc:View controllerName="com.sap.nodedemouimodule.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:f="sap.f"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    </Page>
+    <f:DynamicPage showFooter="true">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>title}"/>
+                </f:heading>
+                <f:expandedContent>
+                    <Label text="{i18n>subheading}"/>
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Label text="{i18n>subheading}"/>
+                </f:snappedContent>
+                <f:snappedTitleOnMobile>
+                    <Title text="{i18n>subheading}"/>
+                </f:snappedTitleOnMobile>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar id="idFilterBar" useToolbar="false" search=".onSearch">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem name="ID" label="Libri" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox name="ID" items="{
+												path: 'odataV2>/Libri',
+												templateShareable: true
+											}">
+                                        <core:Item key="{odataV2>ID}" text="{odataV2>Titolo}"/>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Autore_ID" label="Autore" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox name="Autore" items="{
+												path: 'odataV2>/Autori',
+												templateShareable: true
+											}">
+                                        <core:Item key="{odataV2>ID}" text="{odataV2>Nome}"/>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Genere_ID" label="Genere" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox name="Genere" items="{
+												path: 'odataV2>/Generi',
+												templateShareable: true
+											}">
+                                        <core:Item key="{odataV2>ID}" text="{odataV2>Nome}"/>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="idTableLibri" sticky="HeaderToolbar,ColumnHeaders" inset="false" items="{
+							path: 'odataV2>/Libri',
+                            parameters: { expand: 'Autore,Genere' }
+						}" class="sapFDynamicPageAlignContent" width="auto">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="{i18n>title_table}" level="H2"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>col1_homepage}" />
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>col2_homepage}" />
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>col3_homepage}" />
+                    </Column>
+                    <Column >
+                        <Text text="{i18n>col4_homepage}" />
+                    </Column>
+                    <Column >
+                        <Text text="{i18n>col5_homepage}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation">
+                        <cells>
+                            <Text text="{odataV2>Titolo}" />
+                            <ObjectNumber number="{odataV2>CopieDisponibili}" state="{=${odataV2>CopieDisponibili} === 0 ? 'Error' : 'Success'}"/>
+                            <Text text="{odataV2>Autore/Nome}" />
+                            <Text text="{odataV2>Genere/Nome}" />
+                            <HBox>
+                                <Button tooltip="{i18n>button_edit}" icon="sap-icon://edit" class="sapUiTinyMarginEnd" press="onEditBook"/>
+                                <Button tooltip="{i18n>button_delete}" icon="sap-icon://delete" press="onDeleteBook" enabled="{=${odataV2>CopieDisponibili} === 0}"/>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
 </mvc:View>
