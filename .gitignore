@@ -9,8 +9,7 @@ gen/
 node_modules/
 target/
 resources/
-dist/
-**/dist/
+
 
 # Web IDE, App Studio
 .che/
