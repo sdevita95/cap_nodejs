@@ -1,19 +1,21 @@
 sap.ui.define([
     "./BaseController",
+    "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
     'sap/ui/model/Filter',
     'sap/ui/model/FilterOperator'
-], (Controller, MessageBox, MessageToast, Filter, FilterOperator) => {
+], (Controller, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) => {
     "use strict";
     const sUriOdataV2 = "/odata/v2/backend";
-    const sUriOdataV4 = "/odata/v4/backend";
+    //const sUriOdataV4 = "/odata/v4/backend";
 
     return Controller.extend("com.sap.nodedemouimodule.controller.View1", {
         onInit() {
             this._oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             this._oRouter.getRoute("RouteView1").attachMatched(this._onRouteMatched, this);
             this._oBundleI18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            this.getView().setModel(new JSONModel({}), "viewModel")
         },
         onSearch: function () {
             const oFilterBar = this.getView().byId("idFilterBar")
@@ -59,28 +61,39 @@ sap.ui.define([
                 dependentOn: this.getView()
             });
         },
-        onCreateBook: async function () {
+        _deleteBooks: async function (oModel, sEntitySet, sMethod, oUrlParameters) {
+            const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters)
+            MessageBox.success(result.deleteLibro.message)
+            this._refreshDataTable();
+        },
+        onCreateBook: function () {
+            const viewModel = this.getView().getModel("viewModel") 
+            viewModel.setProperty("/currentDialog", {
+                Titolo: "",
+                CopieDisponibili: 1,
+                AutoreID: "",
+                GenereID: ""
+            })
+            const oView = this.getView(),
+                oDialog = sap.ui.xmlfragment(oView.getId(), "com.sap.nodedemouimodule.view.fragment.View1.Dialog.AggiungiLibro", this);
+            oView.addDependent(oDialog);
+            oDialog.open();
+        },
+        _confirmCreateBook: async function (oEvent) {
+            const sIdDialog = oEvent.getSource().data("idDialog");
+            const viewModel = this.getView().getModel("viewModel")
             const oModel = new sap.ui.model.odata.v2.ODataModel(sUriOdataV2, {
                 defaultUpdateMethod: sap.ui.model.odata.UpdateMethod.Put,
             });
             const sEntitySet = "/addLibro",
                 sMethod = "POST",
-                oUrlParameters = {
-                    Titolo: "Test_Post",
-                    CopieDisponibili: 3,
-                    AutoreID: 1,
-                    GenereID: 1
-                }
-            this._createBooks(oModel, sEntitySet, sMethod, oUrlParameters)
+                oUrlParameters = viewModel.getProperty("/currentDialog")
+            this._createBooks(oModel, sEntitySet, sMethod, oUrlParameters, sIdDialog)
         },
-        _createBooks: async function (oModel, sEntitySet, sMethod, oUrlParameters) {
+        _createBooks: async function (oModel, sEntitySet, sMethod, oUrlParameters, sIdDialog) {
             const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters)
             MessageBox.success(result.addLibro.message)
-            this._refreshDataTable();
-        },
-        _deleteBooks: async function (oModel, sEntitySet, sMethod, oUrlParameters) {
-            const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters)
-            MessageBox.success(result.deleteLibro.message)
+            this.onAnnullaDialog(null, sIdDialog)
             this._refreshDataTable();
         },
         _refreshDataTable: function () {

@@ -1,0 +1,46 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:u="sap.ui.unified">
+    <Dialog id="idDialogAggiungiLibro" title="{i18n>dialog_AggiungiLibroTitle}" class="sapUiContentPadding" resizable="true" verticalScrolling="false" contentWidth="30%">
+        <content>
+            <VBox>
+                <!-- Titolo -->
+                <Label text="{i18n>dialog_labelTitolo}" />
+                <Input value="{viewModel>/currentDialog/Titolo}" placeholder="{i18n>dialog_placeholderTitle}" />
+
+                <!-- Copie Disponibili -->
+                <Label text="{i18n>dialog_labelCopieDisponibili}" />
+                <StepInput value="{viewModel>/currentDialog/CopieDisponibili}" min="1" step="1" />
+
+                <!-- Autore -->
+                <Label text="{i18n>dialog_labelAutore}" />
+                <ComboBox selectedKey="{viewModel>/currentDialog/AutoreID}" items="{
+                    path: 'odataV2>/Autori',
+                    templateShareable: true
+                }">
+                    <core:Item key="{odataV2>ID}" text="{odataV2>Nome}" />
+                </ComboBox>
+
+                <!-- Genere -->
+                <Label text="{i18n>dialog_labelGenere}" />
+                <ComboBox selectedKey="{viewModel>/currentDialog/GenereID}" items="{
+                    path: 'odataV2>/Generi',
+                    templateShareable: true
+                }">
+                    <core:Item key="{odataV2>ID}" text="{odataV2>Nome}" />
+                </ComboBox>
+            </VBox>
+        </content>
+        <footer>
+            <Toolbar>
+                <content>
+                    <ToolbarSpacer />
+                    <Button text="Annulla" tooltip="{i18n>generic_tooltipAnnulla}" customData:idDialog="idDialogAggiungiLibro" press="onAnnullaDialog" class="btn-custom-outline" />
+                    <Button text="Aggiungi" tooltip="{i18n>generic_tooltipAggiungi}" type="Emphasized" customData:idDialog="idDialogAggiungiLibro" class="btn-custom" press="_confirmCreateBook" />
+                </content>
+            </Toolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>
