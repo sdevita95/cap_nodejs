@@ -9,17 +9,6 @@ service CatalogoServizio {
     entity Generi   as projection on db.Generi;
     entity Utenti   as projection on db.Utenti;
     entity Prestiti as projection on db.Prestiti;
-
-    //esempio di function
-    type LibroOutput {
-        ID               : Integer;
-        Titolo           : String;
-        CopieDisponibili : Integer;
-        Autore_ID        : Integer;
-        Genere_ID        : Integer;
-    }
-
-    function LibriPerAutore(ID : Integer) returns array of LibroOutput;
 }
 
 @path: 'northwind'

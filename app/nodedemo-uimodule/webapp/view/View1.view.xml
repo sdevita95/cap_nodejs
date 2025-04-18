@@ -1,6 +1,72 @@
 <mvc:View controllerName="com.sap.nodedemouimodule.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    </Page>
+    <f:DynamicPage showFooter="true">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>title}"/>
+                </f:heading>
+                <f:expandedContent>
+                    <Label text="{i18n>subheading}"/>
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Label text="{i18n>subheading}"/>
+                </f:snappedContent>
+                <f:snappedTitleOnMobile>
+                    <Title text="{i18n>subheading}"/>
+                </f:snappedTitleOnMobile>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <!-- Insert Filterbar -->
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table sticky="HeaderToolbar,ColumnHeaders" inset="false" items="{
+							path: 'odataV2>/Libri',
+                            parameters: { expand: 'Autore,Genere' }
+						}" class="sapFDynamicPageAlignContent" width="auto">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="{i18n>title_table}" level="H2"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>col1_homepage}" />
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>col2_homepage}" />
+                    </Column>
+                    <Column>
+                        <Text text="{i18n>col3_homepage}" />
+                    </Column>
+                    <Column >
+                        <Text text="{i18n>col4_homepage}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation">
+                        <cells>
+                            <Text text="{odataV2>Titolo}" />
+                            <ObjectNumber number="{odataV2>CopieDisponibili}" state="{=${odataV2>CopieDisponibili} === 0 ? 'Error' : 'Success'}"/>
+                            <Text text="{odataV2>Autore/Nome}" />
+                            <Text text="{odataV2>Genere/Nome}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
 </mvc:View>
