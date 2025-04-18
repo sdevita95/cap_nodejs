@@ -22,10 +22,10 @@ modules:
 - name: nodeDemo-db-deployer
   type: hdb
   path: gen/db
-  requires:
-  - name: nodeDemo-db
   parameters:
     buildpack: nodejs_buildpack
+  requires:
+  - name: nodeDemo-db
 - name: nodeDemo-approuter
   type: approuter.nodejs
   path: approuter
