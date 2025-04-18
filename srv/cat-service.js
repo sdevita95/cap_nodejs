@@ -1,5 +1,6 @@
 const cds = require('@sap/cds');
 module.exports = async (srv) => {
+    //internal backend method
     srv.on('READ', 'Libri', async (req) => {
         const query = req.query;
         const libri = await cds.tx(req).run(query);
@@ -21,8 +22,38 @@ module.exports = async (srv) => {
     });
 
     const northwind_srv = await cds.connect.to("northwind");
-
     srv.on("READ", "Products", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+
+    srv.on("READ", "Categories", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Orders", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Order_Details", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Suppliers", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Customers", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Employees", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Shippers", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "CustomerDemographics", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Territories", (req) => {
+        return northwind_srv.tx(req).run(req.query);
+    });
+    srv.on("READ", "Regions", (req) => {
         return northwind_srv.tx(req).run(req.query);
     });
 };

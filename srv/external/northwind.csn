@@ -720,7 +720,7 @@
     },
     "Discount": {
      "key": true,
-     "type": "cds.Double",
+     "type": "cds.Decimal",
      "@odata.Type": "Edm.Single",
      "notNull": true
     },
@@ -846,7 +846,7 @@
    "elements": {
     "Discount": {
      "key": true,
-     "type": "cds.Double",
+     "type": "cds.Decimal",
      "@odata.Type": "Edm.Single",
      "notNull": true
     },
