@@ -2,9 +2,7 @@
 _out
 *.db
 *.sqlite
-connection.properties
-default-*.json
-.cdsrc-private.json
+
 gen/
 node_modules/
 target/
@@ -35,3 +33,8 @@ mta_archives/
 
 # @cap-js/cds-typer
 @cds-models
+
+# da commentare per ambiente produttivo
+#.cdsrc-private.json
+#default-*.json
+#connection.properties
