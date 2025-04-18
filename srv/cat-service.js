@@ -1,5 +1,5 @@
 const cds = require('@sap/cds');
-module.exports = (srv) => {
+module.exports = async (srv) => {
     srv.on('READ', 'Libri', async (req) => {
         const query = req.query;
         const libri = await cds.tx(req).run(query);
@@ -18,5 +18,11 @@ module.exports = (srv) => {
             return req.reject(400, "error.noAuthorID");
         }
         return await SELECT.from(Libri).where({ Autore_ID: ID });
+    });
+
+    const northwind_srv = await cds.connect.to("northwind");
+
+    srv.on("READ", "Products", (req) => {
+        return northwind_srv.tx(req).run(req.query);
     });
 };

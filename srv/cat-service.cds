@@ -1,4 +1,5 @@
 using com.sap.libreria as db from '../db/schema';
+using {northwind} from './external/northwind';
 
 service CatalogoServizio {
     @readonly
@@ -26,4 +27,9 @@ service CatalogoServizio {
     }
 
     function LibriPerAutore(ID : Integer) returns array of LibroOutput;
+}
+@path: 'northwind'
+service NorthwindService {
+    @readonly
+    entity Products as projection on northwind.Products;
 }
