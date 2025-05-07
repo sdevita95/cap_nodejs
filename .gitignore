@@ -2,7 +2,7 @@
 _out
 *.db
 *.sqlite
-
+app/nodedemo-uimodule/dist/
 gen/
 node_modules/
 target/
@@ -34,7 +34,7 @@ mta_archives/
 # @cap-js/cds-typer
 @cds-models
 
-# da commentare per ambiente produttivo
+# da decommentare per ambiente produttivo
 #.cdsrc-private.json
 #default-*.json
 #connection.properties
