@@ -13,53 +13,55 @@ module.exports = async (srv) => {
     });
     const { Libri, Autori, Generi } = srv.entities;
     srv.on('addLibro', async (req) => {
-      const { Titolo, CopieDisponibili, AutoreID, GenereID } = req.data;
-  
-      if (!Titolo || !CopieDisponibili || !AutoreID || !GenereID) {
-        return req.reject(400, {
-          code: 400,
-          message: msg.for('error.missingData')
+        const { Titolo, CopieDisponibili, AutoreID, GenereID } = req.data;
+        if (!Titolo || !CopieDisponibili || !AutoreID || !GenereID) {
+          return req.reject(400, {
+            code: 400,
+            message: msg.for('error.missingData')
           });
-      }
-  
-      try {
-        const autore = await SELECT.one.from(Autori).where({ ID: AutoreID });
-        const genere = await SELECT.one.from(Generi).where({ ID: GenereID });
-  
-        if (!autore) {
-          return req.reject(404, {
-            code: 404,
-            message: msg.for('error.authorNotFound', [AutoreID])
-            });
         }
-  
-        if (!genere) {
-          return req.reject(404, {
-            code: 404,
-            message: msg.for('error.genreNotFound', [GenereID])
+      
+        try {
+          const autore = await SELECT.one.from(Autori).where({ ID: AutoreID });
+          const genere = await SELECT.one.from(Generi).where({ ID: GenereID });
+      
+          if (!autore) {
+            return req.reject(404, {
+              code: 404,
+              message: msg.for('error.authorNotFound', [AutoreID])
             });
-        }
-  
-        const result = await INSERT.into(Libri).entries({
-          Titolo,
-          CopieDisponibili,
-          Autore_ID: AutoreID,
-          Genere_ID: GenereID
-        });
-  
-        return {
-          code: 201,
-          message: msg.for('success.bookCreated', [Titolo])
+          }
+      
+          if (!genere) {
+            return req.reject(404, {
+              code: 404,
+              message: msg.for('error.genreNotFound', [GenereID])
+            });
+          }
+      
+          const lastLibro = await SELECT.one.from(Libri).columns('ID').orderBy('ID desc');
+          const newID = lastLibro?.ID ? lastLibro.ID + 1 : 1;
+          await INSERT.into(Libri).entries({
+            ID: newID,
+            Titolo,
+            CopieDisponibili,
+            Autore_ID: AutoreID,
+            Genere_ID: GenereID
+          });
+      
+          return {
+            code: 201,
+            message: msg.for('success.bookCreated', [Titolo])
           };
-  
-      } catch (err) {
-        console.error(err);
-        return req.reject(500, {
-          code: 500,
-          message: msg.for('error.process', [err.message])
+      
+        } catch (err) {
+          console.error(err);
+          return req.reject(500, {
+            code: 500,
+            message: msg.for('error.process', [err.message])
           });
-      }
-    });
+        }
+      });      
     const { Prestiti } = srv.entities;
     srv.on('deleteLibro', async (req) => {
         const { ID } = req.data;

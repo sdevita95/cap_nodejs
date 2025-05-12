@@ -16,7 +16,8 @@
     "@sap/hana-client": "^2.24.24",
     "@sap/xssec": "^4",
     "express": "^4",
-    "g": "^2.0.1"
+    "g": "^2.0.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
