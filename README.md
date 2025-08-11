@@ -28,3 +28,7 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
 - Rename nodeDemo (match case) with your project name. -> e. testAppDemo
 - Rename nodedemo (match case) with your project name. -> e. testappdemo
 - Rename folder in app-> nodedemo-uimodule with your project name -> e. testappdemo-uimodule
+
+## Profile hybrid
+- cf env app_name-approuter -> destination, html5-apps-repo, xsuaa
+- cf env app_name-db-deployer -> hana
