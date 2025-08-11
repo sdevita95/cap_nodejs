@@ -1,15 +1,11 @@
 {
-  "xsappname": "nodeDemo",
+  "xsappname": "testRename",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
   "scopes": [
     {
       "name": "uaa.user",
       "description": "UAA"
-    },
-    {
-      "name": "$XSAPPNAME.CORSO_RW_SC",
-      "description": "CORSO_RW_SC"
     }
   ],
   "role-templates": [
@@ -19,14 +15,6 @@
       "scope-references": [
         "uaa.user"
       ]
-    },
-    {
-      "name": "CORSO_RW_RT",
-      "description": "generated",
-      "scope-references": [
-        "$XSAPPNAME.CORSO_RW_SC"
-      ],
-      "attribute-references": []
     }
   ],
   "oauth2-configuration": {

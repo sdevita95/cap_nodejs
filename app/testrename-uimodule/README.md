@@ -8,7 +8,7 @@
 |**Template Used**<br>Basic|
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/catalogo-servizio/|
-|**Module Name**<br>nodedemo-uimodule|
+|**Module Name**<br>testrename-uimodule|
 |**Application Title**<br>App UI|
 |**Namespace**<br>com.sap|
 |**UI5 Theme**<br>sap_horizon|
@@ -17,7 +17,7 @@
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
 
-## nodedemo-uimodule
+## testrename-uimodule
 
 An SAP Fiori application.
 
@@ -25,7 +25,7 @@ An SAP Fiori application.
 
 -   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:
 
-http://localhost:4004/nodedemo-uimodule/webapp/index.html
+http://localhost:4004/testrename-uimodule/webapp/index.html
 
 #### Pre-requisites:
 

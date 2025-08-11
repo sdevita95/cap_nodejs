@@ -1,15 +1,15 @@
 _schema-version: 3.3.0
-ID: nodeDemo
+ID: testRename
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: nodeDemo-srv
+- name: testRename-srv
   type: nodejs
   path: gen/srv
   requires:
-  - name: nodeDemo-db
-  - name: nodeDemo-auth
-  - name: nodeDemo-destination-service
+  - name: testRename-db
+  - name: testRename-auth
+  - name: testRename-destination-service
   provides:
   - name: srv-api
     properties:
@@ -19,20 +19,20 @@ modules:
     instances: 1
   build-parameters:
     builder: npm-ci
-- name: nodeDemo-db-deployer
+- name: testRename-db-deployer
   type: hdb
   path: gen/db
   parameters:
     buildpack: nodejs_buildpack
   requires:
-  - name: nodeDemo-db
-- name: nodeDemo-approuter
+  - name: testRename-db
+- name: testRename-approuter
   type: approuter.nodejs
   path: approuter
   requires:
-  - name: nodeDemo_html_repo_runtime
-  - name: nodeDemo-auth
-  - name: nodeDemo-destination-service
+  - name: testRename_html_repo_runtime
+  - name: testRename-auth
+  - name: testRename-destination-service
   - name: srv-api
   provides:
   - name: app-api
@@ -43,25 +43,25 @@ modules:
     disk-quota: 256M
     keep-existing-routes: true
     memory: 256M
-- name: nodeDemo-app-content
+- name: testRename-app-content
   type: com.sap.application.content
   path: .
   requires:
-  - name: nodeDemo-repo-host
+  - name: testRename-repo-host
     parameters:
       content-target: true
   build-parameters:
     build-result: resources
     requires:
     - artifacts:
-      - comsapnodedemouimodule.zip
-      name: comsapnodedemouimodule
+      - comsaptestrenameuimodule.zip
+      name: comsaptestrenameuimodule
       target-path: resources/
-- name: comsapnodedemouimodule
+- name: comsaptestrenameuimodule
   type: html5
-  path: app/nodedemo-uimodule
+  path: app/testrename-uimodule
   requires:
-    - name: nodeDemo-auth
+    - name: testRename-auth
   build-parameters:
     build-result: dist
     builder: custom
@@ -70,26 +70,26 @@ modules:
     - npm run build:cf
     supported-platforms: []
 resources:
-- name: nodeDemo_html_repo_runtime
+- name: testRename_html_repo_runtime
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
     service-plan: app-runtime
-- name: nodeDemo-db
+- name: testRename-db
   type: com.sap.xs.hdi-container
   parameters:
     service: hana
     service-plan: hdi-shared
-- name: nodeDemo-auth
+- name: testRename-auth
   type: org.cloudfoundry.managed-service
   parameters:
     config:
       tenant-mode: dedicated
-      xsappname: nodeDemo-${org}-${space}
+      xsappname: testRename-${org}-${space}
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
-- name: nodeDemo-destination-service
+- name: testRename-destination-service
   type: org.cloudfoundry.managed-service
   requires:
     - name: srv-api
@@ -114,13 +114,13 @@ resources:
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
-    service-name: nodeDemo-destination-service
+    service-name: testRename-destination-service
     service-plan: lite
-- name: nodeDemo-repo-host
+- name: testRename-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: nodeDemo-html5-service
+    service-name: testRename-html5-service
     service-plan: app-host
 parameters:
   deploy_mode: html5-repo

@@ -1,2 +1,2 @@
 
-using from './nodedemo-uimodule/annotations';
+using from './testrename-uimodule/annotations';

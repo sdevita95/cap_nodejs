@@ -10,7 +10,7 @@ sap.ui.define([
     const sUriOdataV2 = "/odata/v2/backend";
     //const sUriOdataV4 = "/odata/v4/backend";
 
-    return Controller.extend("com.sap.nodedemouimodule.controller.View1", {
+    return Controller.extend("com.sap.testrenameuimodule.controller.View1", {
         onInit() {
             this._oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             this._oRouter.getRoute("RouteView1").attachMatched(this._onRouteMatched, this);
@@ -75,7 +75,7 @@ sap.ui.define([
                 GenereID: ""
             })
             const oView = this.getView(),
-                oDialog = sap.ui.xmlfragment(oView.getId(), "com.sap.nodedemouimodule.view.fragment.View1.Dialog.AggiungiLibro", this);
+                oDialog = sap.ui.xmlfragment(oView.getId(), "com.sap.testrenameuimodule.view.fragment.View1.Dialog.AggiungiLibro", this);
             oView.addDependent(oDialog);
             oDialog.open();
         },

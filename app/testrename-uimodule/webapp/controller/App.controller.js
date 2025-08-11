@@ -3,7 +3,7 @@ sap.ui.define([
 ], (BaseController) => {
   "use strict";
 
-  return BaseController.extend("com.sap.nodedemouimodule.controller.App", {
+  return BaseController.extend("com.sap.testrenameuimodule.controller.App", {
       onInit() {
       }
   });

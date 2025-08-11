@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.sap.nodedemouimodule.controller.View1"
+<mvc:View controllerName="com.sap.testrenameuimodule.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns:fb="sap.ui.comp.filterbar"

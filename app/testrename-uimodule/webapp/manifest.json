@@ -1,7 +1,7 @@
 {
   "_version": "1.65.0",
   "sap.app": {
-    "id": "com.sap.nodedemouimodule",
+    "id": "com.sap.testrenameuimodule",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -75,7 +75,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.sap.nodedemouimodule.i18n.i18n"
+          "bundleName": "com.sap.testrenameuimodule.i18n.i18n"
         }
       },
       "odataV4": {
@@ -121,9 +121,9 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "com.sap.nodedemouimodule.view",
+        "path": "com.sap.testrenameuimodule.view",
         "async": true,
-        "viewPath": "com.sap.nodedemouimodule.view"
+        "viewPath": "com.sap.testrenameuimodule.view"
       },
       "routes": [
         {
@@ -142,7 +142,7 @@
       }
     },
     "rootView": {
-      "viewName": "com.sap.nodedemouimodule.view.App",
+      "viewName": "com.sap.testrenameuimodule.view.App",
       "type": "XML",
       "id": "App",
       "async": true

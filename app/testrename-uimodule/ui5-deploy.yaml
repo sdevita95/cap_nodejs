@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: com.sap.nodedemouimodule
+  name: com.sap.testrenameuimodule
 type: application
 resources:
   configuration:
@@ -21,6 +21,6 @@ builder:
     - name: ui5-task-zipper
       afterTask: generateCachebusterInfo
       configuration:
-        archiveName: comsapnodedemouimodule
+        archiveName: comsaptestrenameuimodule
         additionalFiles:
           - xs-app.json

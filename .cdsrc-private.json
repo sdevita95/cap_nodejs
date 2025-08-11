@@ -7,8 +7,8 @@
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
           "org": "c27ed503trial",
           "space": "dev",
-          "instance": "nodeDemo-db",
-          "key": "nodeDemo-db-key"
+          "instance": "testRename-db",
+          "key": "testRename-db-key"
         },
         "kind": "hana",
         "vcap": {

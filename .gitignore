@@ -1,8 +1,8 @@
-# CAP nodeDemo
+# CAP testRename
 _out
 *.db
 *.sqlite
-app/nodedemo-uimodule/dist/
+app/testrename-uimodule/dist/
 gen/
 node_modules/
 target/

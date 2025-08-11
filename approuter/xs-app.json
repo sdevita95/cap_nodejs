@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/comsapnodedemouimodule/index.html",
+  "welcomeFile": "/comsaptestrenameuimodule/index.html",
   "authenticationMethod": "route",
   "routes": [
     {
