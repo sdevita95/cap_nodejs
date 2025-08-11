@@ -23,3 +23,8 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
+
+## Rename template
+- Rename nodeDemo (match case) with your project name. -> e. testAppDemo
+- Rename nodedemo (match case) with your project name. -> e. testappdemo
+- Rename folder in app-> nodedemo-uimodule with your project name -> e. testappdemo-uimodule
