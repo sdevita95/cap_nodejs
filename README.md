@@ -23,3 +23,13 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at https://cap.cloud.sap/docs/get-started/.
+
+## Rename template
+- Rename nodeDemo (match case) with your project name. -> e. testAppDemo
+- Rename nodedemo (match case) with your project name. -> e. testappdemo
+- Rename folder in app-> nodedemo-uimodule with your project name -> e. testappdemo-uimodule
+
+## Profile pg-hybrid
+- cf env app_name-approuter -> destination, html5-apps-repo, xsuaa
+- cf env app_name-db-deployer -> hana
+- cf ssh -L 12345:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv
