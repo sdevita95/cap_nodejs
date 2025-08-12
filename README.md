@@ -29,7 +29,26 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
 - Rename nodedemo (match case) with your project name. -> e. testappdemo
 - Rename folder in app-> nodedemo-uimodule with your project name -> e. testappdemo-uimodule
 
+## Setup db PostgreSQL
+- npm add @cap-js/postgres
+    cds env requires.db --for production
+    output:
+    {
+        impl: '@cap-js/postgres',
+        dialect: 'postgres',
+        kind: 'postgres'
+    }
+
 ## Profile pg-hybrid
-- cf env app_name-approuter -> destination, html5-apps-repo, xsuaa
-- cf env app_name-db-deployer -> hana
+- cf ssh -L 5432:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv -> test in locale da bas
+
+## DBeaver
+- choco install cloudfoundry-cli
+- cf login
 - cf ssh -L 5432:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv
+- config DBeaver
+    -host: localhost
+    -port: 5432
+    -database: nlnQABRfEtSE
+    -nome: df1025bb5ab5
+    -pass: 2fc8f6e204be910d9f2a779225d313
