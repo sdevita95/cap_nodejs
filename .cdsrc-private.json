@@ -7,12 +7,33 @@
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
           "org": "c27ed503trial",
           "space": "dev",
-          "instance": "testRename-db",
-          "key": "testRename-db-key"
+          "instance": "testRename-postgres",
+          "key": "srv_key",
+          "credentials": {
+            "host": "postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com",
+            "port": 6238,
+            "user": "df1025bb5ab5",
+            "password": "2fc8f6e204be910d9f2a779225d313",
+            "database": "nlnQABRfEtSE",
+            "url": "postgres://df1025bb5ab5:2fc8f6e204be910d9f2a779225d313@postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238/nlnQABRfEtSE"
+          }
         },
-        "kind": "hana",
+        "kind": "postgres",
         "vcap": {
           "name": "db"
+        }
+      },
+      "custom-service:testRename-postgres": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "dd2eb6f2trial",
+          "space": "dev",
+          "instance": "testRename-postgres",
+          "key": "srv_key"
+        },
+        "vcap": {
+          "name": "custom-service:testRename-postgres"
         }
       }
     }

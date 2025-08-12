@@ -23,5 +23,6 @@
       "https://*.hana.ondemand.com/**",
       "https://*.applicationstudio.cloud.sap/**"
     ]
-  }
+  },
+  "attributes": []
 }

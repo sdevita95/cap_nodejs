@@ -1,0 +1,12 @@
+{
+    "engines": {
+      "node": "^18"
+    },
+    "dependencies": {
+      "@sap/cds": "*",
+      "@cap-js/postgres": "2.0.4"
+    },
+    "scripts": {
+      "start": "cds-deploy"
+    }
+  }

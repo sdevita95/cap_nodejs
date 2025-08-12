@@ -38,3 +38,5 @@ mta_archives/
 #.cdsrc-private.json
 #default-*.json
 #connection.properties
+# added by cds
+.cdsrc-private.json

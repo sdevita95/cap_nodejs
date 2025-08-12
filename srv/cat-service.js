@@ -61,7 +61,7 @@ module.exports = async (srv) => {
             message: msg.for('error.process', [err.message])
           });
         }
-      });      
+      });
     const { Prestiti } = srv.entities;
     srv.on('deleteLibro', async (req) => {
         const { ID } = req.data;
@@ -92,40 +92,5 @@ module.exports = async (srv) => {
                 message: msg.for('error.process', [err.message])
             });
         }
-    });
-
-    const northwind_srv = await cds.connect.to("northwind");
-    srv.on("READ", "Products", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Categories", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Orders", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Order_Details", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Suppliers", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Customers", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Employees", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Shippers", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "CustomerDemographics", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Territories", (req) => {
-        return northwind_srv.tx(req).run(req.query);
-    });
-    srv.on("READ", "Regions", (req) => {
-        return northwind_srv.tx(req).run(req.query);
     });
 };
