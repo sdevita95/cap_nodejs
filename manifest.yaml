@@ -1,0 +1,14 @@
+---
+applications: 
+- name: pgadmin-web 
+  instances: 1 
+  memory: 512M
+  disk_quota: 512M
+  health-check-type: process 
+  docker:
+    image: dpage/pgadmin4:2023-05-02-1
+  random-route: true 
+  env: 
+    PGADMIN_DEFAULT_EMAIL: test@email.com 
+    PGADMIN_DEFAULT_PASSWORD: test_password 
+    PGADMIN_LISTEN_ADDRESS: 0.0.0.0

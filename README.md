@@ -32,4 +32,4 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
 ## Profile pg-hybrid
 - cf env app_name-approuter -> destination, html5-apps-repo, xsuaa
 - cf env app_name-db-deployer -> hana
-- cf ssh -L 12345:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv
+- cf ssh -L 5432:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv
