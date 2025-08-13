@@ -3,9 +3,9 @@
     xmlns:core="sap.ui.core"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:f="sap.f"
-    xmlns="sap.m">
-    <f:DynamicPage showFooter="true">
-        <!-- DynamicPage Title -->
+    xmlns="sap.m"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <f:DynamicPage showFooter="true">        <!-- DynamicPage Title -->
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -21,8 +21,7 @@
                     <Title text="{i18n>subheading}"/>
                 </f:snappedTitleOnMobile>
             </f:DynamicPageTitle>
-        </f:title>
-        <!-- DynamicPage Header -->
+        </f:title>        <!-- DynamicPage Header -->
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
@@ -30,30 +29,21 @@
                         <fb:filterGroupItems>
                             <fb:FilterGroupItem name="ID" label="Libri" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <MultiComboBox name="ID" items="{
-												path: 'odataV2>/Libri',
-												templateShareable: true
-											}">
+                                    <MultiComboBox name="ID" items="{												path: 'odataV2>/Libri',												templateShareable: true											}">
                                         <core:Item key="{odataV2>ID}" text="{odataV2>Titolo}"/>
                                     </MultiComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem name="Autore_ID" label="Autore" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <MultiComboBox name="Autore" items="{
-												path: 'odataV2>/Autori',
-												templateShareable: true
-											}">
+                                    <MultiComboBox name="Autore" items="{												path: 'odataV2>/Autori',												templateShareable: true											}">
                                         <core:Item key="{odataV2>ID}" text="{odataV2>Nome}"/>
                                     </MultiComboBox>
                                 </fb:control>
                             </fb:FilterGroupItem>
                             <fb:FilterGroupItem name="Genere_ID" label="Genere" groupName="Group1" visibleInFilterBar="true">
                                 <fb:control>
-                                    <MultiComboBox name="Genere" items="{
-												path: 'odataV2>/Generi',
-												templateShareable: true
-											}">
+                                    <MultiComboBox name="Genere" items="{												path: 'odataV2>/Generi',												templateShareable: true											}">
                                         <core:Item key="{odataV2>ID}" text="{odataV2>Nome}"/>
                                     </MultiComboBox>
                                 </fb:control>
@@ -64,10 +54,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <Table id="idTableLibri" sticky="HeaderToolbar,ColumnHeaders" inset="false" items="{
-							path: 'odataV2>/Libri',
-                            parameters: { expand: 'Autore,Genere' }
-						}" class="sapFDynamicPageAlignContent" width="auto">
+            <Table id="idTableLibri" sticky="HeaderToolbar,ColumnHeaders" inset="false" items="{path: 'odataV2>/Libri',parameters: { expand: 'Autore,Genere' }}" class="sapFDynamicPageAlignContent" width="auto">
                 <headerToolbar>
                     <Toolbar>
                         <Title text="{i18n>title_table}" level="H2"/>
@@ -96,17 +83,23 @@
                             <Text text="{odataV2>Titolo}" />
                             <ObjectNumber number="{odataV2>CopieDisponibili}" state="{=${odataV2>CopieDisponibili} === 0 ? 'Error' : 'Success'}"/>
                             <Text text="{odataV2>Autore/Nome}" />
-                            <Text text="{odataV2>Genere/Nome}" />
-                            <HBox>
-                                <Button tooltip="{i18n>button_edit}" icon="sap-icon://edit" class="sapUiTinyMarginEnd" press="onEditBook"/>
-                                <Button tooltip="{i18n>button_delete}" icon="sap-icon://delete" press="onDeleteBook" enabled="{=${odataV2>CopieDisponibili} === 0}"/>
+                            <HBox >
+                                <Text visible="{= ${ui>/editBook} !== ${odataV2>ID} }" text="{odataV2>Genere/Nome}" />
+                                <Select change="onChangeSelect" customData:path="Genere_ID" visible="{= ${ui>/editBook} === ${odataV2>ID} }" selectedKey="{path: 'odataV2>Genere_ID'}" items="{path: 'odataV2>/Generi',templateShareable: true}">
+                                    <core:Item key="{odataV2>ID}" text="{odataV2>Nome}" />
+                                </Select>
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween" width="5rem">
+                                <Button visible="{= ${ui>/editBook} !== ${odataV2>ID} }" tooltip="{i18n>button_edit}" icon="sap-icon://edit" press="onEditBook" />
+                                <Button visible="{= ${ui>/editBook} === ${odataV2>ID} }" tooltip="{i18n>button_save}" type="Emphasized" icon="sap-icon://save" press="_confirmEditBook" />
+                                <Button visible="{= ${ui>/editBook} === ${odataV2>ID} }" tooltip="{i18n>button_cancel}" icon="sap-icon://cancel" press="onCancelEdit" />
+                                <Button visible="{= ${ui>/editBook} !== ${odataV2>ID} }" tooltip="{i18n>button_delete}" icon="sap-icon://delete" enabled="{= ${odataV2>CopieDisponibili} === 0 }" press="onDeleteBook" />
                             </HBox>
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
-        </f:content>
-        <!-- DynamicPage Footer -->
+        </f:content>        <!-- DynamicPage Footer -->
         <f:footer>
             <OverflowToolbar>
                 <ToolbarSpacer/>

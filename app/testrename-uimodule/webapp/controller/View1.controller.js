@@ -17,6 +17,12 @@ sap.ui.define([
             this._oBundleI18n = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this.getView().setModel(new JSONModel({}), "viewModel")
         },
+        _onRouteMatched: function () {
+            const uiModel = new sap.ui.model.json.JSONModel({
+                editBook: null
+            });
+            this.getView().setModel(uiModel, "ui");
+        },
         onSearch: function () {
             const oFilterBar = this.getView().byId("idFilterBar")
             var aTableFilters = oFilterBar.getFilterGroupItems().reduce(function (aResult, oFilterGroupItem) {
@@ -63,7 +69,7 @@ sap.ui.define([
             });
         },
         _deleteBooks: async function (oModel, sEntitySet, sMethod, oUrlParameters) {
-            const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters)
+            const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters, "function")
             MessageBox.success(result.deleteLibro.message)
             this._refreshDataTable();
         },
@@ -92,7 +98,7 @@ sap.ui.define([
             this._createBooks(oModel, sEntitySet, sMethod, oUrlParameters, sIdDialog)
         },
         _createBooks: async function (oModel, sEntitySet, sMethod, oUrlParameters, sIdDialog) {
-            const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters)
+            const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters, "function")
             MessageBox.success(result.addLibro.message)
             this.onAnnullaDialog(null, sIdDialog)
             this._refreshDataTable();
@@ -102,6 +108,41 @@ sap.ui.define([
             if (oTable) {
                 oTable.getBinding("items").refresh(true);
             }
-        }
+        },
+        onEditBook: function (oEvent) {
+            const ctx = this._getRowContext(oEvent);
+            const bookId = ctx.getProperty("ID");
+            this.getView().getModel("ui").setProperty("/editBook", bookId);
+        },
+        onChangeSelect: function (oEvent) {
+            const oSelect = oEvent.getSource();
+            const sChangePath = oSelect.data().path
+            const sKey = oSelect.getSelectedKey();
+            const oContext = oSelect.getBindingContext("odataV2");
+            oContext.setProperty(sChangePath, sKey);
+        },
+        _confirmEditBook: async function (oEvent) {
+            const oModel = this.getView().getModel("odataV2");
+            const ctx = this._getRowContext(oEvent);
+            const sEntitySet = "/updateLibro",
+                sMethod = "POST",
+                oUrlParameters = {
+                    ID: ctx.getProperty("ID"),
+                    Genere_ID: ctx.getProperty("Genere_ID")
+                };
+            try {
+                const result = await this.backendAction(oModel, sEntitySet, sMethod, oUrlParameters, "function");
+                this.getView().getModel("ui").setProperty("/editBook", null);
+                MessageBox.success(result.updateLibro.message)
+                this._refreshDataTable()
+            } catch (e) {
+            }
+        },
+        onCancelEdit: function (oEvent) {
+            const ctx = this._getRowContext(oEvent);
+            const oModel = this.getView().getModel("odataV2");
+            oModel.resetChanges([ctx.getPath()]);
+            this.getView().getModel("ui").setProperty("/editBook", null);
+        },
     });
 });

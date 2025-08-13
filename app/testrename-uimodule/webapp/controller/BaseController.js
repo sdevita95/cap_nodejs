@@ -23,23 +23,48 @@ sap.ui.define(
         return Controller.extend(
             "com.sap.testrenameuimodule.controller.BaseController", {
             onInit: function () { },
-            backendAction: function (oModel, sEntitySet, sMethod, oUrlParameters) {
+            backendAction: function (oModel, sPath, sMethod, oUrlParameters, sOperationType) {
                 return new Promise(function (resolve, reject) {
-                    oModel.callFunction(sEntitySet, {
-                        method: sMethod,
-                        urlParameters: oUrlParameters,
-                        success: function (res) {
-                            resolve(res);
-                        },
-                        error: function (e) {
-                            const sMessage = JSON.parse(e.responseText).error.message.value;
-                            BusyIndicator.hide();
-                            MessageBox.error(sMessage);
-                            reject(e);
-                        }.bind(this),
-                    });
+                    const fnError = function (e) {
+                        let sMessage;
+                        try {
+                            sMessage = JSON.parse(e.responseText).error.message.value;
+                        } catch {
+                            sMessage = e.message || "Unknown error";
+                        }
+                        sap.ui.core.BusyIndicator.hide();
+                        sap.m.MessageBox.error(sMessage);
+                        reject(e);
+                    };
+                    if (sOperationType === "function") {
+                        oModel.callFunction(sPath, {
+                            method: sMethod,
+                            urlParameters: oUrlParameters,
+                            success: resolve,
+                            error: fnError
+                        });
+                    } else if (sOperationType === "update") {
+                        oModel.update(sPath, oUrlParameters, {
+                            merge: true,
+                            success: resolve,
+                            error: fnError
+                        });
+                    } else if (sOperationType === "create") {
+                        oModel.create(sPath, oUrlParameters, {
+                            success: resolve,
+                            error: fnError
+                        });
+                    } else if (sOperationType === "remove") {
+                        oModel.remove(sPath, {
+                            success: resolve,
+                            error: fnError
+                        });
+                    } else {
+                        reject(new Error("Unsupported operation type"));
+                    }
                 });
             },
+
             oDataRead: function (sURL, sEntitySet, oFilter, urlParameters) {
                 var oModel = new sap.ui.model.odata.v2.ODataModel(sURL, true);
                 var that = this;
@@ -199,6 +224,9 @@ sap.ui.define(
                     }
                 }
                 return orFilters;
+            },
+            _getRowContext: function (oEvent) {
+                return oEvent.getSource().getBindingContext("odataV2");
             }
         }
         );

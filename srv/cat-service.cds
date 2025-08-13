@@ -5,16 +5,21 @@ service CatalogoServizio {
 
     entity Libri    as projection on db.Libri;
 
-    action addLibro(Titolo : String,
-                    CopieDisponibili : Integer,
-                    AutoreID : Integer,
-                    GenereID : Integer) returns {
-        code : Integer;
+    action addLibro(Titolo: String,
+                    CopieDisponibili: Integer,
+                    AutoreID: Integer,
+                    GenereID: Integer)                  returns {
+        code    : Integer;
         message : String;
     };
 
-    action deleteLibro(ID : Integer)    returns {
-        code : Integer;
+    action deleteLibro(ID: Integer)                     returns {
+        code    : Integer;
+        message : String;
+    };
+
+    action updateLibro(ID: Integer, Genere_ID: Integer) returns {
+        code    : Integer;
         message : String;
     };
 
