@@ -2,11 +2,11 @@
     "VCAP_SERVICES": {
         "destination": [
             {
-                "binding_guid": "ae7e71ab-20b6-4717-96f8-35db66bac81f",
+                "binding_guid": "e3a65ae8-80cd-4bf0-84b6-08bc6a4cf4e6",
                 "binding_name": null,
                 "credentials": {
                     "clientid": "sb-clone02aae6c2c2534705aa628e731881c845!b492621|destination-xsappname!b62",
-                    "clientsecret": "ae7e71ab-20b6-4717-96f8-35db66bac81f$zuGqhwZKGN-9p2ztEuzUiN3ZLbucxJW1LEMr5lL93gE=",
+                    "clientsecret": "e3a65ae8-80cd-4bf0-84b6-08bc6a4cf4e6$aUvZkDmIaNiwh9Z3Ac3HRjFTp0rp6DjepbR41uCB_mc=",
                     "credential-type": "binding-secret",
                     "identityzone": "dd2eb6f2trial",
                     "instanceid": "02aae6c2-c253-4705-aa62-8e731881c845",
@@ -38,7 +38,7 @@
         ],
         "html5-apps-repo": [
             {
-                "binding_guid": "df1d7759-3244-4eed-988f-a8e55b7766f6",
+                "binding_guid": "8786511d-9574-4001-971b-3e4930bc7f2c",
                 "binding_name": null,
                 "credentials": {
                     "grant_type": "client_credentials",
@@ -47,7 +47,7 @@
                     "uaa": {
                         "apiurl": "https://api.authentication.us10.hana.ondemand.com",
                         "clientid": "sb-900bc1d5-71cc-4970-8405-23ea7df59554!b492621|html5-apps-repo-uaa!b424",
-                        "clientsecret": "df1d7759-3244-4eed-988f-a8e55b7766f6$Tr02PliezpxvDvrO_s62GfOlDPt2JqRJeAyLHO1Dbv0=",
+                        "clientsecret": "8786511d-9574-4001-971b-3e4930bc7f2c$eXl88WZ-FBtgKi7MOX7CISo5ZnI9g1YO_8Zfo4tJs8A=",
                         "credential-type": "binding-secret",
                         "identityzone": "dd2eb6f2trial",
                         "identityzoneid": "ac6973c9-4aaa-4590-aa44-98fc61e850f4",
@@ -84,13 +84,13 @@
         ],
         "xsuaa": [
             {
-                "binding_guid": "d4edb905-2c41-430e-8c15-472d8084ba1a",
+                "binding_guid": "a4ee7655-a564-4956-ae36-6b265c507ae5",
                 "binding_name": null,
                 "credentials": {
                     "apiurl": "https://api.authentication.us10.hana.ondemand.com",
                     "clientid": "sb-testRename-dd2eb6f2trial-dev!t492621",
-                    "clientsecret": "d4edb905-2c41-430e-8c15-472d8084ba1a$tVk5llPn9XOZ1ZP2xyvAOUWjaKetI97ALBqKMFkwBd0=",
-                    "credential-type": "binding-secret",
+                    "clientsecret": "yv+hypO6pvahCAzPi78WOhOyoQo=",
+                    "credential-type": "instance-secret",
                     "identityzone": "dd2eb6f2trial",
                     "identityzoneid": "ac6973c9-4aaa-4590-aa44-98fc61e850f4",
                     "sburl": "https://internal-xsuaa.authentication.us10.hana.ondemand.com",

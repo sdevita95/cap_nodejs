@@ -23,9 +23,10 @@ sap.ui.define([
                 var oControl = oFilterGroupItem.getControl(),
                     aSelectedKeys = oControl.getSelectedKeys(),
                     aFilters = aSelectedKeys.map(function (sSelectedKey) {
+                        const isNumber = !isNaN(Number(sSelectedKey));
                         return new Filter({
                             path: oFilterGroupItem.getName(),
-                            operator: FilterOperator.Contains,
+                            operator: isNumber ? FilterOperator.EQ : FilterOperator.Contains,
                             value1: sSelectedKey
                         });
                     });
@@ -67,7 +68,7 @@ sap.ui.define([
             this._refreshDataTable();
         },
         onCreateBook: function () {
-            const viewModel = this.getView().getModel("viewModel") 
+            const viewModel = this.getView().getModel("viewModel")
             viewModel.setProperty("/currentDialog", {
                 Titolo: "",
                 CopieDisponibili: 1,
