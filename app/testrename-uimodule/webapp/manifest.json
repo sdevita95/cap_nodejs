@@ -31,14 +31,6 @@
           "annotations": [],
           "odataVersion": "2.0"
         }
-      },
-      "odataNorthwindV2": {
-        "uri": "/odata/v2/northwind/",
-        "type": "OData",
-        "settings": {
-          "annotations": [],
-          "odataVersion": "2.0"
-        }
       }
     }
   },

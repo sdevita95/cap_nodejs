@@ -137,4 +137,5 @@ build-parameters:
       commands:
         - npm ci
         - npx cds build --production
-        - bash ./pg-build.sh
+#        - bash ./pg-build.sh
+        - node pg-build.js
