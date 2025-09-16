@@ -5,7 +5,7 @@
         "binding": {
           "type": "cf",
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
-          "org": "c27ed503trial",
+          "org": "fdb826b0trial",
           "space": "dev",
           "instance": "nodeDemo-db",
           "key": "nodeDemo-db-key"
