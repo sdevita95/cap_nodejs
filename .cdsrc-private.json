@@ -5,17 +5,17 @@
         "binding": {
           "type": "cf",
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
-          "org": "c27ed503trial",
+          "org": "fdb826b0trial",
           "space": "dev",
           "instance": "testRename-postgres",
           "key": "srv_key",
           "credentials": {
-            "host": "postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com",
-            "port": 6238,
-            "user": "df1025bb5ab5",
-            "password": "2fc8f6e204be910d9f2a779225d313",
-            "database": "nlnQABRfEtSE",
-            "url": "postgres://df1025bb5ab5:2fc8f6e204be910d9f2a779225d313@postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238/nlnQABRfEtSE"
+            "host": "postgres-9187c044-00f3-48e7-b9ff-ce85ac654f87.cqryblsdrbcs.us-east-1.rds.amazonaws.com",
+            "port": 3061,
+            "user": "2c83d9dbe5b2",
+            "password": "c347a7ec3e69a90f8691be71eb",
+            "database": "mRGLplpBlvhu",
+            "url": "postgres://2c83d9dbe5b2:c347a7ec3e69a90f8691be71eb@postgres-9187c044-00f3-48e7-b9ff-ce85ac654f87.cqryblsdrbcs.us-east-1.rds.amazonaws.com:3061/mRGLplpBlvhu"
           }
         },
         "kind": "postgres",
@@ -27,7 +27,7 @@
         "binding": {
           "type": "cf",
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
-          "org": "dd2eb6f2trial",
+          "org": "fdb826b0trial",
           "space": "dev",
           "instance": "testRename-postgres",
           "key": "srv_key"
