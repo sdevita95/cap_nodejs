@@ -42,12 +42,12 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
 ## Profile pg-hybrid
 - cf enable-ssh testRename-srv
 - cf restart testRename-srv
-- cf ssh -L 5432:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv -> test in locale da bas
+- cf ssh -L 5432:<host>:<port> testRename-srv -> test in locale da bas
 
 ## DBeaver
 - choco install cloudfoundry-cli
 - cf login
-- cf ssh -L 5432:postgres-f57085fd-7c43-4567-ae6a-ea5e30da3609.cqryblsdrbcs.us-east-1.rds.amazonaws.com:6238 testRename-srv
+- cf ssh -L 5432:<host>:<port> testRename-srv
 - config DBeaver
     -host: localhost
     -port: 5432
