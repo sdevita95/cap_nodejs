@@ -1,4 +1,4 @@
-<mvc:View controllerName="com.sap.testrenameuimodule.controller.App"
+<mvc:View controllerName="com.sap.testbacklog68uimodule.controller.App"
     displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">

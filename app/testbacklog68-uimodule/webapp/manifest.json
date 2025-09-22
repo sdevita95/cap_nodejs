@@ -1,7 +1,7 @@
 {
   "_version": "1.65.0",
   "sap.app": {
-    "id": "com.sap.testrenameuimodule",
+    "id": "com.sap.testbacklog68uimodule",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -67,7 +67,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "com.sap.testrenameuimodule.i18n.i18n"
+          "bundleName": "com.sap.testbacklog68uimodule.i18n.i18n"
         }
       },
       "odataV4": {
@@ -113,9 +113,9 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "com.sap.testrenameuimodule.view",
+        "path": "com.sap.testbacklog68uimodule.view",
         "async": true,
-        "viewPath": "com.sap.testrenameuimodule.view"
+        "viewPath": "com.sap.testbacklog68uimodule.view"
       },
       "routes": [
         {
@@ -134,10 +134,14 @@
       }
     },
     "rootView": {
-      "viewName": "com.sap.testrenameuimodule.view.App",
+      "viewName": "com.sap.testbacklog68uimodule.view.App",
       "type": "XML",
       "id": "App",
       "async": true
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "testBacklog68"
   }
 }

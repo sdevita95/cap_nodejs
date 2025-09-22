@@ -1,15 +1,15 @@
 _schema-version: 3.3.0
-ID: testRename
+ID: testBacklog68
 description: A simple CAP project.
 version: 1.0.0
 modules:
-  - name: testRename-srv
+  - name: testBacklog68-srv
     type: nodejs
     path: gen/srv
     requires:
-      - name: testRename-auth
-      - name: testRename-destination-service
-      - name: testRename-postgres
+      - name: testBacklog68-auth
+      - name: testBacklog68-destination-service
+      - name: testBacklog68-postgres
     provides:
       - name: srv-api
         properties:
@@ -19,42 +19,25 @@ modules:
       instances: 1
     build-parameters:
       builder: npm-ci
-  - name: testRename-approuter
-    type: approuter.nodejs
-    path: approuter
-    requires:
-      - name: testRename_html_repo_runtime
-      - name: testRename-auth
-      - name: testRename-destination-service
-      - name: srv-api
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
-    parameters:
-      disk-quota: 256M
-      keep-existing-routes: true
-      memory: 256M
-  - name: testRename-app-content
+  - name: testBacklog68-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: testRename-repo-host
+      - name: testBacklog68-repo-host
         parameters:
           content-target: true
     build-parameters:
       build-result: resources
       requires:
         - artifacts:
-            - comsaptestrenameuimodule.zip
-          name: comsaptestrenameuimodule
+            - comsaptestbacklog68uimodule.zip
+          name: comsaptestbacklog68uimodule
           target-path: resources/
-  - name: comsaptestrenameuimodule
+  - name: comsaptestbacklog68uimodule
     type: html5
-    path: app/testrename-uimodule
+    path: app/testbacklog68-uimodule
     requires:
-      - name: testRename-auth
+      - name: testBacklog68-auth
     build-parameters:
       build-result: dist
       builder: custom
@@ -63,7 +46,7 @@ modules:
         - npm run build:cf
       supported-platforms:
         []
-  - name: testRename-postgres-deployer
+  - name: testBacklog68-postgres-deployer
     type: nodejs
     path: gen/pg
     parameters:
@@ -74,29 +57,29 @@ modules:
         - name: deploy-to-postgresql
           command: npm start
     requires:
-      - name: testRename-postgres
+      - name: testBacklog68-postgres
 resources:
-  - name: testRename_html_repo_runtime
+  - name: testBacklog68_html_repo_runtime
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
       service-plan: app-runtime
-  - name: testRename-auth
+  - name: testBacklog68-auth
     type: org.cloudfoundry.managed-service
     parameters:
       config:
         tenant-mode: dedicated
-        xsappname: testRename-${org}-${space}
+        xsappname: testBacklog68-${org}-${space}
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
-  - name: testRename-destination-service
+  - name: testBacklog68-destination-service
     type: org.cloudfoundry.managed-service
     requires:
       - name: srv-api
     parameters:
       config:
-        HTML5Runtime_enabled: false
+        HTML5Runtime_enabled: true
         init_data:
           instance:
             destinations:
@@ -115,15 +98,15 @@ resources:
             existing_destinations_policy: update
         version: 1.0.0
       service: destination
-      service-name: testRename-destination-service
+      service-name: testBacklog68-destination-service
       service-plan: lite
-  - name: testRename-repo-host
+  - name: testBacklog68-repo-host
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
-      service-name: testRename-html5-service
+      service-name: testBacklog68-html5-service
       service-plan: app-host
-  - name: testRename-postgres
+  - name: testBacklog68-postgres
     type: org.cloudfoundry.managed-service
     parameters:
       service: postgresql-db

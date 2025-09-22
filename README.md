@@ -40,14 +40,14 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
     }
 
 ## Profile pg-hybrid
-- cf enable-ssh testRename-srv
-- cf restart testRename-srv
-- cf ssh -L 5432:<host>:<port> testRename-srv -> test in locale da bas
+- cf enable-ssh testBacklog68-srv
+- cf restart testBacklog68-srv
+- cf ssh -L 5432:<host>:<port> testBacklog68-srv -> test in locale da bas
 
 ## DBeaver
 - choco install cloudfoundry-cli
 - cf login
-- cf ssh -L 5432:<host>:<port> testRename-srv
+- cf ssh -L 5432:<host>:<port> testBacklog68-srv
 - config DBeaver
     -host: localhost
     -port: 5432

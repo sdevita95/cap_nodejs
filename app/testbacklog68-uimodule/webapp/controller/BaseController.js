@@ -21,7 +21,7 @@ sap.ui.define(
         const sUriOdataV4 = "/odata/v4/backend";*/
 
         return Controller.extend(
-            "com.sap.testrenameuimodule.controller.BaseController", {
+            "com.sap.testbacklog68uimodule.controller.BaseController", {
             onInit: function () { },
             backendAction: function (oModel, sPath, sMethod, oUrlParameters, sOperationType) {
                 return new Promise(function (resolve, reject) {

@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
 
-specVersion: "3.1"
+specVersion: '3.0'
 metadata:
-  name: com.sap.testrenameuimodule
+  name: com.sap.testbacklog68uimodule
 type: application
 server:
   customMiddleware:

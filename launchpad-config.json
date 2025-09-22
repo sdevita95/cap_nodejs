@@ -1,0 +1,10 @@
+{
+  "staticDefaultSite": "comsaptestbacklog68uimodule.testbacklog68Site",
+  "applications": {
+    "comsaptestbacklog68uimodule": {
+      "module": "comsaptestbacklog68uimodule",
+      "technology": "UI5",
+      "url": "#testbacklog68-display"
+    }
+  }
+}

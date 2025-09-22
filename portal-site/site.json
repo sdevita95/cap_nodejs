@@ -1,0 +1,64 @@
+{
+  "_version": "3.0.0",
+  "identification": {
+    "id": "comsaptestbacklog68uimodule.testbacklog68Site",
+    "entityType": "bundle"
+  },
+  "descriptor": {
+    "sap.app": {
+      "id": "comsaptestbacklog68uimodule.testbacklog68Site",
+      "type": "card",
+      "applicationVersion": {
+        "version": "1.0.0"
+      },
+      "title": "testBacklog68 Site"
+    },
+    "sap.flp": {
+      "type": "sitecontent"
+    }
+  },
+  "payload": {
+    "config": {
+      "ushellConfig": {
+        "defaultRenderer": "fiori2",
+        "applications": {
+          "testbacklog68-display": {
+            "additionalInformation": "SAPUI5.Component=com.sap.testbacklog68uimodule",
+            "applicationType": "URL",
+            "url": "./",
+            "description": "testBacklog68 Application"
+          }
+        }
+      }
+    },
+    "site": {
+      "identification": {
+        "id": "comsaptestbacklog68uimodule.testbacklog68Site-site",
+        "entityType": "site"
+      },
+      "payload": {
+        "config": {
+          "homeApp": "testbacklog68-display"
+        },
+        "groupsOrder": ["default"],
+        "groups": {
+          "default": {
+            "identification": {
+              "id": "default",
+              "title": "testBacklog68",
+              "entityType": "group"
+            },
+            "payload": {
+              "tiles": [
+                {
+                  "id": "testbacklog68-tile",
+                  "appId": "testbacklog68-display"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

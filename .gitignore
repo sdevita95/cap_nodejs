@@ -1,8 +1,8 @@
-# CAP testRename
+# CAP testBacklog68
 _out
 *.db
 *.sqlite
-app/testrename-uimodule/dist/
+app/testbacklog68-uimodule/dist/
 gen/
 node_modules/
 target/

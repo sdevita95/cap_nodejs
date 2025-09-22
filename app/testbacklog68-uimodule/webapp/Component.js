@@ -1,10 +1,10 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "com/sap/testrenameuimodule/model/models"
+    "com/sap/testbacklog68uimodule/model/models"
 ], (UIComponent, models) => {
     "use strict";
 
-    return UIComponent.extend("com.sap.testrenameuimodule.Component", {
+    return UIComponent.extend("com.sap.testbacklog68uimodule.Component", {
         metadata: {
             manifest: "json",
             interfaces: [

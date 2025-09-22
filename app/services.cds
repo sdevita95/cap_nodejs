@@ -1,2 +1,2 @@
 
-using from './testrename-uimodule/annotations';
+using from './testbacklog68-uimodule/annotations';
